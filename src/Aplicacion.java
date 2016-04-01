@@ -6,4 +6,7 @@ public class Aplicacion {
     //Abrir, cerrar, leer de fichero.
     //MAIN.
     //Constructor, metodos de las historias de usuario.
+    
+    
+    //Soy una niña malvada escribiendo cosas
 }
