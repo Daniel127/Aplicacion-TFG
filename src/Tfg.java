@@ -148,5 +148,20 @@ public class Tfg {
         s= sc.nextLine();
         this.setfComienzo(s);
     }
+public void setAll(String titulo, String descripcion, String fRegistro, String fComienzo, String fConvocatoria, String fFinal, String nombAlumno, String apProfesor, int nota){
+		this.titulo=titulo;
+	   this.descripcion= descripcion;
+	    this.fRegistro= fRegistro;
+	    this.fComienzo=fComienzo;
+		this.fConvocatoria=fConvocatoria;
+	    this.fFinal=fFinal;
+	    this. nombAlumno=nombAlumno;
+	    this.apProfesor=apProfesor;
+	    this.nota=nota;
+	}
+
+	public String toFileTypeString(){
+		return titulo+":"+descripcion+":"+fRegistro+":"+fComienzo+":"+fConvocatoria+":"+fFinal+":"+nombAlumno+":"+apProfesor+":"+nota;
+	}
 }
 

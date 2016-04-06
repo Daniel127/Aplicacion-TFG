@@ -4,12 +4,18 @@ import java.io.BufferedReader
 public class Aplicacion {
     public static void main(String args[]){
         ArrayList<Tfg> listaTfg;
+	GestorFicheros gestorF = new GestorFicheros();
+        int a�adidos;
+    	listaTfg= gestorF.leerTFGs();
+
         Profesor p = new Profesor();
         p.leerProfesor();
         Tfg tfg= new Tfg();
         tfg.leerTfg();
         BufferedReader r = new BufferedReader("System.in");
         int opc = -1;
+
+//gestorF.actualizarFicheroTFGs(listaTfg, a�adidos);
     }
 
     //Abrir, cerrar, leer de fichero.
