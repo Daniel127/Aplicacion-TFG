@@ -32,7 +32,7 @@ public class Aplicacion {
     			switch(opc){
     				case 1: opcion1(); break;
     				case 2: opcion2(); break;
-    				case 3: opcion3(); break;
+    				case 3: mostrarTFG(); break;
     				case 4: opcion4(); break;
     				case 5: opcion5(); break;
     				case 6: break;
@@ -49,9 +49,18 @@ public class Aplicacion {
     private void opcion2(){
     	
     }
-    private void opcion3(){
-    	
-    }
+   
+    private void mostrarTFG(){
+    	Iterator<Tfg> it=listaTfg.iterator();
+    	while(it.hasNext()){
+    		Tfg aux=it.next();
+    		if(aux.getNombAlumno()== " "){
+    			System.out.println("Nombre del TFG"+aux. getTitulo());
+    			System.out.println("Descripcion del tfg"+aux.getDescripcion());
+    			System.out.println("Fecha registro del tfg" + aux.getfRegistro());
+    			System.out.println("Apellidos del profesor"+aux.getApProfesor());
+    		}
+    	}
     private void opcion4(){
     	
     }
