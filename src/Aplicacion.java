@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.io.BufferedReader
+import java.util.Iterator;
+import java.util.Scanner;
+
 
 public class Aplicacion {
     public static void main(String args[]){
@@ -26,7 +29,7 @@ public class Aplicacion {
     		System.out.println("== Menu Principal ==");
     		System.out.println("1. ");
     		System.out.println("2. ");
-    		System.out.println("3. ");
+    		System.out.println("3.Mostrar Tfg libres ");
     		System.out.println("4. ");
     		System.out.println("5. ");
     		System.out.println("6. Salir");
@@ -57,18 +60,36 @@ public class Aplicacion {
     }
    
     private void mostrarTFG(){
+    	int i=-1;
     	Iterator<Tfg> it=listaTfg.iterator();
     	while(it.hasNext()){
     		Tfg aux=it.next();
+    		i++;
     		if(aux.getNombAlumno()== " "){
-    			System.out.println("Nombre del TFG "+aux.getTitulo());
-    			System.out.println("Descripcion del TFG "+aux.getDescripcion());
-    			System.out.println("Fecha registro del TFG " + aux.getfRegistro());
-    			System.out.println("Apellidos del profesor "+aux.getApProfesor());
+    			System.out.println(" Posición en el registro " + i + "Nombre del TFG"+aux. getTitulo());
+    			System.out.println("Descripcion del tfg"+aux.getDescripcion());
+    			System.out.println("Fecha registro del tfg" + aux.getfRegistro());
+    			System.out.println("Apellidos del profesor"+aux.getApProfesor());
     		}
     	}
+    	
     }
-    private void opcion4(){
+    
+    private void asignarAlumno(){
+    	String nm,fc;
+    	int pos;
+    	Scanner sc=new Scanner(System.in);
+    	System.out.println("Nombre del Alumno");
+    	nm=sc.nextLine();
+    	System.out.println("Fecha comienzo TFG (dd/mm/aaaa)");
+    	fc=sc.nextLine();
+    	System.out.println("Posición del TFG deseado en el registro");
+    	pos=sc.nextInt();
+    	Tfg aux=listaTfg.get(pos);
+    	aux.setNombAlumno(nm);
+    	aux.setfComienzo(fc);
+    	listaTfg.set(pos, aux);
+    	System.out.println("Asignación de un alumno a un TFG completada");	
     	
     }
     private void opcion5(){
