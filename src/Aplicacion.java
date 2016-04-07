@@ -61,6 +61,7 @@ public class Aplicacion {
     			System.out.println("Apellidos del profesor "+aux.getApProfesor());
     		}
     	}
+    }
     private void opcion4(){
     	
     }
