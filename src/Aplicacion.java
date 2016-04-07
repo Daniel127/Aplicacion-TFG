@@ -61,7 +61,7 @@ public class Aplicacion {
     	while(it.hasNext()){
     		Tfg aux=it.next();
     		if(aux.getNombAlumno()== " "){
-    			System.out.println("Nombre del TFG "+aux. getTitulo());
+    			System.out.println("Nombre del TFG "+aux.getTitulo());
     			System.out.println("Descripcion del TFG "+aux.getDescripcion());
     			System.out.println("Fecha registro del TFG " + aux.getfRegistro());
     			System.out.println("Apellidos del profesor "+aux.getApProfesor());
