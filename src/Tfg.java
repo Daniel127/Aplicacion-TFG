@@ -22,6 +22,18 @@ public class Tfg {
         this.apProfesor = null;
         this.nota = 0;
     }
+    public Tfg(String titulo, String descripcion, String fRegistro, String fComienzo, String fConvocatoria, String fFinal, String nombAlumno, String apProfesor, int nota){
+		this.titulo=titulo;
+	   this.descripcion= descripcion;
+	    this.fRegistro= fRegistro;
+	    this.fComienzo=fComienzo;
+		this.fConvocatoria=fConvocatoria;
+	    this.fFinal=fFinal;
+	    this. nombAlumno=nombAlumno;
+	    this.apProfesor=apProfesor;
+	    this.nota=nota;
+	}
+
 
     public String getTitulo() {
         return titulo;
@@ -118,7 +130,7 @@ public class Tfg {
         this.setApProfesor(s);
 
         System.out.println("");
-        System.out.println("Â¿Este TFG tiene ya un alumno asignado? Si lo tiene, introduzca un 1 ");
+        System.out.println("¿Este TFG tiene ya un alumno asignado? Si lo tiene, introduzca un 1, o cualquier numero");
         n= sc.nextInt();
         if(n== 1){
             System.out.println("");
@@ -148,17 +160,6 @@ public class Tfg {
         s= sc.nextLine();
         this.setfComienzo(s);
     }
-public void setAll(String titulo, String descripcion, String fRegistro, String fComienzo, String fConvocatoria, String fFinal, String nombAlumno, String apProfesor, int nota){
-		this.titulo=titulo;
-	   this.descripcion= descripcion;
-	    this.fRegistro= fRegistro;
-	    this.fComienzo=fComienzo;
-		this.fConvocatoria=fConvocatoria;
-	    this.fFinal=fFinal;
-	    this. nombAlumno=nombAlumno;
-	    this.apProfesor=apProfesor;
-	    this.nota=nota;
-	}
 
 	public String toFileTypeString(){
 		return titulo+":"+descripcion+":"+fRegistro+":"+fComienzo+":"+fConvocatoria+":"+fFinal+":"+nombAlumno+":"+apProfesor+":"+nota;
