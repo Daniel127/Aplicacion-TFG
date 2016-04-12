@@ -7,12 +7,13 @@ public class GestorFicheros {
 	BufferedReader fRTrabajos;
 	BufferedWriter fWProfesores;
 	BufferedWriter fWTrabajos;
+	BufferedWriter fWborradoTFGs;
 
 	public GestorFicheros() {
 
 		try {
 			fWProfesores = new BufferedWriter(new FileWriter("Profesores.txt"));
-			fWTrabajos = new BufferedWriter(new FileWriter("TrabajosFinGrado.txt", true));
+			fWTrabajos = new BufferedWriter(new FileWriter("TrabajosFinGrado.txt",true));
 			fRProfesores = new BufferedReader(new FileReader("Profesores.txt"));
 			fRTrabajos = new BufferedReader(new FileReader("TrabajosFinGrado.txt"));
 
@@ -50,13 +51,35 @@ public class GestorFicheros {
 		return listaTFGs;
 
 	}
+	public void anyadirTFG(ArrayList<Tfg> listaTFGs){
+		int tamañoL = listaTFGs.size();
 
-	public void actualizarFicheroTFGs(ArrayList<Tfg> listaTFGs) {
-
-		int tamanyo = listaTFGs.size();
 		try {
-			for (int i = 0; i < tamanyo; i++) {
+			fWTrabajos.write(listaTFGs.get(tamañoL-1).toFileTypeString());
+			fWTrabajos.newLine();
+			fWTrabajos.flush();
 
+		} catch (IOException e) {
+			System.out.println("Datos añadidos correctamente");
+			e.printStackTrace();
+		}
+	}
+
+	public void actualizarTFGs(ArrayList<Tfg> listaTFGs) {
+
+		try {
+			fWborradoTFGs = new BufferedWriter(new FileWriter("TrabajosFinGrado.txt"));
+			fWborradoTFGs.write("");
+			fWborradoTFGs.close();
+			
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+		}
+
+		int tamañoL = listaTFGs.size();
+		try {
+			for (int i = 0; i< tamañoL; i++) {
 				fWTrabajos.write(listaTFGs.get(i).toFileTypeString());
 				fWTrabajos.newLine();
 			}
@@ -67,11 +90,10 @@ public class GestorFicheros {
 
 		try {
 			fWTrabajos.flush();
-			System.out.println("Datos aï¿½adidos correctamente");
-			System.out.println("");
+			System.out.println("Datos añadidos correctamente");
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Datos no aï¿½adidos");
+			System.out.println("Datos no añadidos");
 		}
 
 	}

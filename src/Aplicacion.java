@@ -66,6 +66,7 @@ public class Aplicacion {
 								System.out.println("");
 							}
 						}
+						gestorF.actualizarTFGs(listaTfg);
 						continuar= false;
 						break;
 					case 5:
@@ -89,7 +90,7 @@ public class Aplicacion {
 		Tfg tfg = new Tfg();
 		tfg.leerTfg();
 		listaTfg.add(tfg);
-		gestorF.actualizarFicheroTFGs(listaTfg);
+		gestorF.anyadirTFG(listaTfg);
 	}
 
 	private static void opcion2() {
@@ -118,7 +119,7 @@ public class Aplicacion {
 		String nm, fc;
 		Scanner sc= new Scanner(System.in);
 		int pos;
-		System.out.println("Posición del TFG deseado en el registro");
+		System.out.println("Posicion del TFG deseado en el registro");
 		pos = sc.nextInt() - 1;
 		return pos;
 	}
