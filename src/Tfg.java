@@ -22,17 +22,18 @@ public class Tfg {
         this.apProfesor = null;
         this.nota = 0;
     }
-    public Tfg(String titulo, String descripcion, String fRegistro, String fComienzo, String fConvocatoria, String fFinal, String nombAlumno, String apProfesor, int nota){
-		this.titulo=titulo;
-	   this.descripcion= descripcion;
-	    this.fRegistro= fRegistro;
-	    this.fComienzo=fComienzo;
-		this.fConvocatoria=fConvocatoria;
-	    this.fFinal=fFinal;
-	    this. nombAlumno=nombAlumno;
-	    this.apProfesor=apProfesor;
-	    this.nota=nota;
-	}
+
+    public Tfg(String titulo, String descripcion, String fRegistro, String fComienzo, String fConvocatoria, String fFinal, String nombAlumno, String apProfesor, int nota) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fRegistro = fRegistro;
+        this.fComienzo = fComienzo;
+        this.fConvocatoria = fConvocatoria;
+        this.fFinal = fFinal;
+        this.nombAlumno = nombAlumno;
+        this.apProfesor = apProfesor;
+        this.nota = nota;
+    }
 
 
     public String getTitulo() {
@@ -107,39 +108,38 @@ public class Tfg {
         this.nota = nota;
     }
 
-    protected void leerTfg(){
-        Scanner sc= new Scanner(System.in);
-        String s;
-        int n;
+    protected void leerTfg() {
+        Scanner sc = new Scanner(System.in);
+        String s, tieneAlumno;
 
         System.out.println("Procediendo a leer TFG: ");
         System.out.print("Introduzca titulo del TFG: ");
-        s= sc.nextLine();
+        s = sc.nextLine();
         this.setTitulo(s);
         System.out.println("");
         System.out.print("Introduzca descripcion del TFG: ");
-        s= sc.nextLine();
+        s = sc.nextLine();
         this.setDescripcion(s);
         System.out.println("");
-        System.out.print("Introduzca la fecha del registro del TFG en formato dd/mm/aaaa");
-        s= sc.nextLine();
+        System.out.print("Introduzca la fecha del registro del TFG: ");
+        s = this.leerfecha();
         this.setfRegistro(s);
         System.out.println("");
         System.out.print("Introduzca el apellido del profesor que propuso este TFG: ");
-        s= sc.nextLine();
+        s = sc.nextLine();
         this.setApProfesor(s);
 
         System.out.println("");
-        System.out.println("�Este TFG tiene ya un alumno asignado? Si lo tiene, introduzca un 1, o cualquier numero");
-        n= sc.nextInt();
-        if(n== 1){
+        System.out.println("Este TFG tiene ya un alumno asignado? Si lo tiene, introduzca un 1. \nEn caso contrario introduzca cualquier otro caracter.");
+        tieneAlumno = sc.nextLine();
+        if (tieneAlumno == "1") {
             System.out.println("");
             System.out.print("Introduzca el nombre del alumno: ");
-            s= sc.nextLine();
+            s = sc.nextLine();
             this.setNombAlumno(s);
             System.out.println("");
-            System.out.print("Introduzca la fecha del inicio del TFG en formato dd/mm/aaaa: ");
-            s= sc.nextLine();
+            System.out.print("Introduzca la fecha del inicio del TFG: ");
+            s = this.leerfecha();
             this.setfComienzo(s);
         }
 
@@ -147,22 +147,94 @@ public class Tfg {
         System.out.println("Se ha terminado de leer los datos de este TFG");
     }
 
-    protected void actualizarTfgMeterAlumno(){
-        Scanner sc= new Scanner(System.in);
+    protected void actualizarTfgMeterAlumno() {
+        Scanner sc = new Scanner(System.in);
         String s;
 
         System.out.println("");
         System.out.print("Introduzca el nombre del alumno: ");
-        s= sc.nextLine();
+        s = sc.nextLine();
         this.setNombAlumno(s);
         System.out.println("");
-        System.out.print("Introduzca la fecha del inicio del TFG en formato dd/mm/aaaa: ");
-        s= sc.nextLine();
+        System.out.print("Introduzca la fecha del inicio del TFG: ");
+        s = this.leerfecha();
         this.setfComienzo(s);
     }
 
-	public String toFileTypeString(){
-		return titulo+":"+descripcion+":"+fRegistro+":"+fComienzo+":"+fConvocatoria+":"+fFinal+":"+nombAlumno+":"+apProfesor+":"+nota;
-	}
+    public String toFileTypeString() {
+        return titulo + ":" + descripcion + ":" + fRegistro + ":" + fComienzo + ":" + fConvocatoria + ":" + fFinal + ":" + nombAlumno + ":" + apProfesor + ":" + nota;
+    }
+
+    private String leerfecha() throws NumberFormatException {
+        String dia = "", mes = "", anyo = "";
+        int numero;
+        boolean continuar = false;
+        Scanner sc = new Scanner(System.in);
+
+
+        while (!continuar) {
+            System.out.println("Introduzca el dia: ");
+            dia = sc.nextLine();
+            if (dia.length() == 2) {
+                try {
+                    numero = Integer.parseInt(dia);
+                    if (0 < numero && numero < 32) {
+                        continuar = true;
+                    } else {
+                        System.out.println("El dia debe ser mayor que 0 y menor que 32 ");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("No se ha intruducido un numero!");
+                }
+            } else {
+                System.out.println("El dia debe estar compuesto de dos numeros (ej: el 1 de un mes se escribe 01)");
+            }
+        }
+        continuar = false;
+
+        while (!continuar) {
+            System.out.println("Introduzca el mes: ");
+            mes = sc.nextLine();
+            if (mes.length() == 2) {
+                try {
+                    numero = Integer.parseInt(mes);
+                    if (0 < numero && numero < 13) {
+                        continuar = true;
+                    } else {
+                        System.out.println("El mes debe ser mayor que 0 y menor que 13 ");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("No se ha intruducido un numero!");
+                }
+            } else {
+                System.out.println("El mes debe estar compuesto de dos numeros (ej: el primer de un año se escribe 01)");
+            }
+        }
+        continuar = false;
+
+
+        while (!continuar) {
+            System.out.println("Introduzca el año: ");
+            anyo = sc.nextLine();
+            if (anyo.length() == 4) {
+                try {
+                    numero = Integer.parseInt(anyo);
+                    if (1900 < numero && numero < 2100) {
+                        continuar = true;
+                    } else {
+                        System.out.println("A no ser que sepas viajar en el tiempo el año que has introducido no es correcto");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("No se ha intruducido un numero!");
+                }
+            } else {
+                System.out.println("El año debe estar compuesto de cuatro numeros");
+            }
+        }
+        continuar = false;
+
+        return ("" + dia + "/" + mes + "/" + anyo);
+    }
 }
+
 

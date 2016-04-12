@@ -53,9 +53,9 @@ public class GestorFicheros {
 
 	public void actualizarFicheroTFGs(ArrayList<Tfg> listaTFGs) {
 
-		int tamañoL = listaTFGs.size();
+		int tamanyo = listaTFGs.size();
 		try {
-			for (int i = 0; i< tamañoL; i++) {
+			for (int i = 0; i < tamanyo; i++) {
 
 				fWTrabajos.write(listaTFGs.get(i).toFileTypeString());
 				fWTrabajos.newLine();
@@ -67,10 +67,11 @@ public class GestorFicheros {
 
 		try {
 			fWTrabajos.flush();
-			System.out.println("Datos añadidos correctamente");
+			System.out.println("Datos aï¿½adidos correctamente");
+			System.out.println("");
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Datos no añadidos");
+			System.out.println("Datos no aï¿½adidos");
 		}
 
 	}
