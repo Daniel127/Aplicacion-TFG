@@ -12,26 +12,17 @@ public class Aplicacion {
 	public static void main(String args[]) {
 		gestorF = new GestorFicheros();
 		listaTfg = gestorF.leerTFGs();
-//
-//		Profesor p = new Profesor();
-//		p.leerProfesor();
-//		Tfg tfg = new Tfg();
-//		tfg.leerTfg();
-//		InputStreamReader input = new InputStreamReader(System.in);
-//		BufferedReader r = new BufferedReader(input);
+
 		inicio();
 	}
-
-	// Abrir, cerrar, leer de fichero.
-	// MAIN.
 
 	private static void inicio() {
 		Scanner r = new Scanner(System.in);
 		int opc = -1, indice;
-		boolean continuar= false;
+		boolean continuar = false;
 		while (opc != 6) {
 			System.out.println("== Menu Principal ==");
-			System.out.println("1. Aï¿½adir TFG");
+			System.out.println("1. Añadir TFG");
 			System.out.println("2. ");
 			System.out.println("3. Mostrar TFG libres");
 			System.out.println("4. Asignar a un alumno un TFG");
@@ -43,38 +34,38 @@ public class Aplicacion {
 
 			if (opc > 1 || opc < 6) {
 				switch (opc) {
-					case 1:
-						anyadirTFG();
-						break;
-					case 2:
-						opcion2();
-						break;
-					case 3:
-						mostrarTFG();
-						break;
-					case 4:
-						mostrarTFG();
-						while(!continuar){
+				case 1:
+					anyadirTFG();
+					break;
+				case 2:
+					opcion2();
+					break;
+				case 3:
+					mostrarTFG();
+					break;
+				case 4:
+					mostrarTFG();
+					while (!continuar) {
 
-							indice = inicioAsignarAlumno();
-							if(listaTfg.get(indice).getNombAlumno() == null) {
-								listaTfg.get(indice).actualizarTfgMeterAlumno();
-								continuar=true;
-							} else {
-								System.out.println("No has introducido el indice de un TFG disponible. " +
-										"\nPor favor introduzca el indice de un TFG que aun no tenga un alumno asignado;");
-								System.out.println("");
-							}
+						indice = inicioAsignarAlumno();
+						if (listaTfg.get(indice).getNombAlumno() == null) {
+							listaTfg.get(indice).actualizarTfgMeterAlumno();
+							continuar = true;
+						} else {
+							System.out.println("No has introducido el indice de un TFG disponible. "
+									+ "\nPor favor introduzca el indice de un TFG que aun no tenga un alumno asignado;");
+							System.out.println("");
 						}
-						gestorF.actualizarTFGs(listaTfg);
-						continuar= false;
-						break;
-					case 5:
-						opcion5();
-						break;
-					case 6:
-						gestorF.close();
-						break;
+					}
+					gestorF.actualizarTFGs(listaTfg);
+					continuar = false;
+					break;
+				case 5:
+					opcion5();
+					break;
+				case 6:
+					gestorF.close();
+					break;
 				}
 			} else {
 				System.out.println("Opcion no valida");
@@ -117,10 +108,12 @@ public class Aplicacion {
 
 	private static int inicioAsignarAlumno() {
 		String nm, fc;
-		Scanner sc= new Scanner(System.in);
-		int pos;
-		System.out.println("Posicion del TFG deseado en el registro");
-		pos = sc.nextInt() - 1;
+		Scanner sc = new Scanner(System.in);
+		int pos = Integer.MAX_VALUE;
+		while (pos > listaTfg.size()) {
+			System.out.println("Posicion del TFG deseado en el registro");
+			pos = sc.nextInt() - 1;
+		}
 		return pos;
 	}
 

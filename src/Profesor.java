@@ -45,29 +45,5 @@ public class Profesor {
         this.despacho = despacho;
     }
 
-    protected void leerProfesor() {
-        Scanner sc = new Scanner(System.in);
-        String s;
-        int n;
-
-        System.out.println("Procediendo a leer profesor:");
-        System.out.print("Introduzca el nombre del profesor: ");
-        s = sc.nextLine();
-        this.setNombre(s);
-        System.out.println("");
-        System.out.print("Introduzca el apellido del profesor: ");
-        s = sc.nextLine();
-        this.setAppellido(s);
-        System.out.println("");
-        System.out.print("Introduzca el email del profesor: ");
-        s = sc.nextLine();
-        this.setEmail(s);
-        System.out.println("");
-        System.out.print("Introduzca el numero del despacho del profesor: ");
-        n = sc.nextInt();
-        this.setDespacho(n);
-        System.out.println("");
-        System.out.println("Se ha terminado de leer los datos. ");
-    }
-
+    
 }

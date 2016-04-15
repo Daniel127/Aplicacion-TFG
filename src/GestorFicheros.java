@@ -3,18 +3,14 @@ import java.util.ArrayList;
 
 public class GestorFicheros {
 
-	BufferedReader fRProfesores;
 	BufferedReader fRTrabajos;
-	BufferedWriter fWProfesores;
 	BufferedWriter fWTrabajos;
 	BufferedWriter fWborradoTFGs;
 
 	public GestorFicheros() {
 
 		try {
-			fWProfesores = new BufferedWriter(new FileWriter("Profesores.txt"));
-			fWTrabajos = new BufferedWriter(new FileWriter("TrabajosFinGrado.txt",true));
-			fRProfesores = new BufferedReader(new FileReader("Profesores.txt"));
+			fWTrabajos = new BufferedWriter(new FileWriter("TrabajosFinGrado.txt", true));
 			fRTrabajos = new BufferedReader(new FileReader("TrabajosFinGrado.txt"));
 
 		} catch (IOException e) {
@@ -37,7 +33,6 @@ public class GestorFicheros {
 				datos = linea.split(":");
 				if (datos.length == 9) {
 					nota = Integer.parseInt(datos[8]);
-					System.out.println(datos[6]);
 					nuevoTFG = new Tfg(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5],
 							datos[6] == "" ? datos[6] : null, datos[7], nota);
 					listaTFGs.add(nuevoTFG);
@@ -51,11 +46,12 @@ public class GestorFicheros {
 		return listaTFGs;
 
 	}
-	public void anyadirTFG(ArrayList<Tfg> listaTFGs){
+
+	public void anyadirTFG(ArrayList<Tfg> listaTFGs) {
 		int tamañoL = listaTFGs.size();
 
 		try {
-			fWTrabajos.write(listaTFGs.get(tamañoL-1).toFileTypeString());
+			fWTrabajos.write(listaTFGs.get(tamañoL - 1).toFileTypeString());
 			fWTrabajos.newLine();
 			fWTrabajos.flush();
 
@@ -71,15 +67,15 @@ public class GestorFicheros {
 			fWborradoTFGs = new BufferedWriter(new FileWriter("TrabajosFinGrado.txt"));
 			fWborradoTFGs.write("");
 			fWborradoTFGs.close();
-			
+
 		} catch (IOException e1) {
-			
+
 			e1.printStackTrace();
 		}
 
 		int tamañoL = listaTFGs.size();
 		try {
-			for (int i = 0; i< tamañoL; i++) {
+			for (int i = 0; i < tamañoL; i++) {
 				fWTrabajos.write(listaTFGs.get(i).toFileTypeString());
 				fWTrabajos.newLine();
 			}
@@ -100,9 +96,7 @@ public class GestorFicheros {
 
 	public void close() {
 		try {
-			fWProfesores.close();
 			fWTrabajos.close();
-			fRProfesores.close();
 			fRTrabajos.close();
 
 		} catch (IOException e) {

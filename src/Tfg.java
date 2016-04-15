@@ -110,7 +110,8 @@ public class Tfg {
 
     protected void leerTfg() {
         Scanner sc = new Scanner(System.in);
-        String s, tieneAlumno;
+        String s;
+        int  tieneAlumno=0;
 
         System.out.println("Procediendo a leer TFG: ");
         System.out.print("Introduzca titulo del TFG: ");
@@ -128,11 +129,11 @@ public class Tfg {
         System.out.print("Introduzca el apellido del profesor que propuso este TFG: ");
         s = sc.nextLine();
         this.setApProfesor(s);
-
+        Scanner sc2 = new Scanner(System.in);
         System.out.println("");
         System.out.println("Este TFG tiene ya un alumno asignado? Si lo tiene, introduzca un 1. \nEn caso contrario introduzca cualquier otro caracter.");
-        tieneAlumno = sc.nextLine();
-        if (tieneAlumno == "1") {
+        tieneAlumno = sc2.nextInt();
+        if (tieneAlumno == 1) {
             System.out.println("");
             System.out.print("Introduzca el nombre del alumno: ");
             s = sc.nextLine();
@@ -152,7 +153,7 @@ public class Tfg {
         String s;
 
         System.out.println("");
-        System.out.print("Introduzca el nombre del alumno: ");
+        System.out.print("/nIntroduzca el nombre del alumno: ");
         s = sc.nextLine();
         this.setNombAlumno(s);
         System.out.println("");
@@ -214,7 +215,7 @@ public class Tfg {
 
 
         while (!continuar) {
-            System.out.println("Introduzca el aÃ±o: ");
+            System.out.println("Introduzca el año: ");
             anyo = sc.nextLine();
             if (anyo.length() == 4) {
                 try {
