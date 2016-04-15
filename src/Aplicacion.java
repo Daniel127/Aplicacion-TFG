@@ -22,7 +22,7 @@ public class Aplicacion {
 		boolean continuar = false;
 		while (opc != 6) {
 			System.out.println("== Menu Principal ==");
-			System.out.println("1. Añadir TFG");
+			System.out.println("1. AÃ±adir TFG");
 			System.out.println("2. ");
 			System.out.println("3. Mostrar TFG libres");
 			System.out.println("4. Asignar a un alumno un TFG");
@@ -110,7 +110,7 @@ public class Aplicacion {
 		String nm, fc;
 		Scanner sc = new Scanner(System.in);
 		int pos = Integer.MAX_VALUE;
-		while (pos > listaTfg.size()) {
+		while (pos >= listaTfg.size()) {
 			System.out.println("Posicion del TFG deseado en el registro");
 			pos = sc.nextInt() - 1;
 		}
