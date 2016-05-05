@@ -52,8 +52,12 @@ public class ControladorAplicacion {
 		// TODO Validar si el profesor existe en la lista de profesores
 		// Opinion: Creo que se deberia mostrar una lista con los profesores existentes
 		String apellidos = vista.leerString("Apellidos Profesor: ");
+		while(!profesores.profesorexiste(apellidos)){
+			vista.imprimirMensaje("El profesor especificado no esta en la lista.Dame de nuevo los apellidos");
+			apellidos = vista.leerString("Apellidos Profesor: ");
+		}
 		TFG nuevo = new TFG(titulo, descripcion, fecha, apellidos);
-		boolean asignarAlumno = vista.leerBoolean("¿El TFG tiene un alumno asignado? (true/false): ");
+		boolean asignarAlumno = vista.leerBoolean("Â¿El TFG tiene un alumno asignado? (true/false): ");
 		if (asignarAlumno) {
 			this.asignarAlumno(nuevo);
 		}
@@ -61,13 +65,25 @@ public class ControladorAplicacion {
 		try {
 			GestorFicheros.guardarTrabajo(nuevo);
 		} catch (IOException e) {
-			vista.error("NO FUE POSIBLE AÑADIR EL TRABAJO A EL FICHERO");
+			vista.error("NO FUE POSIBLE AÃ‘ADIR EL TRABAJO A EL FICHERO");
 		}
 		vista.leerString("Pulsa una tecla para continuar....");
 	}
 
-	public void consultarDatosProfesor(){
-		//TODO
+	public void consultarDatosProfesor() {
+		String ap = vista.leerString("Dame los apellidos del profesor: ");
+		Profesor aux = profesores.obtenerProfesor(ap);
+		if (aux == null) {
+			vista.error("El profesor especificado no esta en la lista");
+		} else {
+			vista.imprimirMensaje("Apellidos del profesor : " + aux.getApellidos());
+			vista.imprimirMensaje("Nombre del profesor : " + aux.getNombre());
+			vista.imprimirMensaje("Despacho del profesor : " + aux.getDespacho());
+			vista.imprimirMensaje("Correo del profesor : " + aux.getCorreo());
+
+		}
+		vista.leerString("Pulsa una tecla para continuar....");
+
 	}
 	
 	public void modificarTrabajo() {
@@ -75,7 +91,17 @@ public class ControladorAplicacion {
 	}
 
 	public void eliminarTrabajo() {
-		//TODO
+	int i = Integer.MAX_VALUE;
+		while (trabajos.size() < i) {
+			i = vista.leerInt("Dame la posiciÃ³n del trabajo que quieres borrar ") - 1;
+
+		}
+
+		trabajos.eliminarTrabajo(i);
+
+		vista.imprimirMensaje("El TFG ha sido eliminado correctamente ");
+
+		vista.leerString("Pulsa una tecla para continuar....");
 	}
 
 	public void asignarAlumno() {
@@ -133,7 +159,7 @@ public class ControladorAplicacion {
 			return false;
 		}
 		if (!(0 <= anyo && anyo <= 9999)) {
-			vista.error("Introduzca un año en el rango [0,9999]");
+			vista.error("Introduzca un aÃ±o en el rango [0,9999]");
 			return false;
 		}
 		return true;
