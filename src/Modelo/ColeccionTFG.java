@@ -47,4 +47,8 @@ public class ColeccionTFG {
 	public TFG getTrabajo(int indice){
 		return trabajos.get(indice);
 	}
+	
+	public int size(){
+		return trabajos.size();
+	}
 }
