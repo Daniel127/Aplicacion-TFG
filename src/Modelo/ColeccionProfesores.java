@@ -14,11 +14,38 @@ public class ColeccionProfesores {
 	}
 
 	public Profesor obtenerProfesor(String apellidos) {
-		// TODO
-		return null;
+		Profesor p = null;
+		boolean encontrado = false;
+		Iterator<Profesor> it = profesores.iterator();
+		while (it.hasNext() && !encontrado) {
+			p = it.next();
+			if (apellidos.equals(p.getApellidos()))
+				encontrado = true;
+		}
+		if (encontrado) {
+			return p;
+		} else {
+			return null;
+		}
+
 	}
 	
 	public List<Profesor> getProfesores(){
 		return profesores;
+	}
+	
+	public boolean profesorexiste(String apellidos){
+		Profesor aux;
+		boolean encontrado = false;
+		Iterator<Profesor> it = profesores.iterator();
+		while (it.hasNext() && !encontrado) {
+			aux= it.next();
+			if (apellidos.equals(aux.getApellidos()))
+				encontrado = true;
+		}
+		
+		return encontrado;
+		
+		
 	}
 }
