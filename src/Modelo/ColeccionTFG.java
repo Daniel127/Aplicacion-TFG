@@ -6,7 +6,7 @@ public class ColeccionTFG {
 	private List<TFG> trabajos;
 	
 	public ColeccionTFG(){
-		trabajos = new LinkedList<>();
+		trabajos = new LinkedList<TFG>();
 	}
 	
 	public void anyadirTrabajo(TFG trabajo){
@@ -25,15 +25,24 @@ public class ColeccionTFG {
 		for(int i = 0; i < trabajos.size(); i++){
 			if(trabajos.get(i).getTitulo().equals(titulo)){
 				trabajos.remove(i);
-				break;
 			}
 		}
 	}
 	
 	public List<TFG> getTrabajosLibres(){
-		List<TFG> libres = new LinkedList<>();
+		List<TFG> libres = new LinkedList<TFG>();
 		for(TFG trabajo : trabajos){
 			if(trabajo.estaDisponible()){
+				libres.add(trabajo);
+			}
+		}
+		return libres;
+	}
+
+	public List<TFG> getTrabajosAsignados(){
+		List<TFG> libres = new LinkedList<TFG>();
+		for(TFG trabajo : trabajos){
+			if(!trabajo.estaDisponible()){
 				libres.add(trabajo);
 			}
 		}

@@ -1,12 +1,17 @@
 package Modelo;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 public class ColeccionProfesores {
 	private List<Profesor> profesores;
 
 	public ColeccionProfesores() {
-		profesores = new ArrayList<>();
+        profesores = new ArrayList<Profesor>();
+        // TODO: Quitar esta mierda
+        Profesor p1 = new Profesor("manuel", "gascon", "1", "gascon@hotmail.com");
+        profesores.add(p1);
+
 	}
 
 	public void anyadirProfesores(List<Profesor> profesores) {

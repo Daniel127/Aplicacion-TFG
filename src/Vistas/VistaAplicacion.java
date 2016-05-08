@@ -1,10 +1,13 @@
 package Vistas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Modelo.ColeccionProfesores;
 import Modelo.ColeccionTFG;
+import Modelo.Profesor;
 import Modelo.TFG;
+import Utilidades.GestorFicheros;
 import Utilidades.GestorIO;
 
 public class VistaAplicacion {
@@ -23,7 +26,7 @@ public class VistaAplicacion {
 		gestorIO.escribirLinea("== Menu Principal ==");
 		gestorIO.escribirLinea("1). Mostrar TFG libres");
 		gestorIO.escribirLinea("2). Asignar un alumno a un TFG");
-		gestorIO.escribirLinea("3). Añadir TFG");
+		gestorIO.escribirLinea("3). Aï¿½adir TFG");
 		gestorIO.escribirLinea("4). Modificar TFG");
 		gestorIO.escribirLinea("5). Eliminar TFG");
 		gestorIO.escribirLinea("6). Consultar datos de profesor");
@@ -48,6 +51,45 @@ public class VistaAplicacion {
 		}
 	}
 
+	public void imprimirOpcionesModificado(){
+		List<TFG> trabajosLibres = trabajos.getTrabajosAsignados();
+		gestorIO.escribirLinea();
+		if(trabajosLibres.size() > 0){
+			gestorIO.escribirLinea("== Menu Modificacion de TFG ==");
+			gestorIO.escribirLinea("1). Liberar TFG");
+			gestorIO.escribirLinea("2). Finalizar TFG");
+		} else {
+			gestorIO.escribirLinea("No hay trabajos asignados");
+		}
+	}
+
+	public void imprimirTrabajosAsignados() {
+		List<TFG> trabajosAsignados = trabajos.getTrabajosAsignados();
+		int i = 1;
+		gestorIO.escribirLinea();
+		if(trabajosAsignados.size() > 0){
+			for (TFG trabajo : trabajosAsignados) {
+				gestorIO.escribirLinea("Trabajo " + i++);
+				gestorIO.escribirLinea("Titulo: " + trabajo.getTitulo());
+				gestorIO.escribirLinea("Descripcion: " + trabajo.getDescripcion());
+				gestorIO.escribirLinea("Fecha de registro: " + trabajo.getFechaRegistro());
+				gestorIO.escribirLinea("Profesor a cargo: " + trabajo.getProfesor());
+				gestorIO.escribirLinea("Alumno asignado: " + trabajo.getAlumno());
+				gestorIO.escribirLinea("Fecha de inicio: " + trabajo.getFechaInicio());
+				gestorIO.escribirLinea();
+			}
+		}else{
+			gestorIO.escribirLinea("No hay trabajos asignados");
+		}
+	}
+
+    public void imprimirProfesores(){
+        int i=1;
+        for(Profesor p : profesores.getProfesores()){
+            gestorIO.escribirLinea("(" + i++ + ")  " + p.getApellidos() + ", " + p.getNombre());
+        }
+    }
+
 	public void imprimirMensaje(String mensaje) {
 		gestorIO.escribirLinea(mensaje);
 	}
@@ -71,4 +113,6 @@ public class VistaAplicacion {
 	public float leerFloat(String mensaje){
 		return gestorIO.leerFloat(mensaje);
 	}
+
+
 }

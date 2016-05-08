@@ -1,10 +1,6 @@
 package Utilidades;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +29,23 @@ public class GestorFicheros {
 		return listaTFGs;
 	}
 
-	public static List<Profesor> leerProfesores() {
-		//TODO
-		return null;
+	public static List<Profesor> leerProfesores() throws IOException {
+		//Leer profesores de fichero (el fichero se proporciona, no hay que crearlo)
+        BufferedReader fProfesores = new BufferedReader(new FileReader("Profesores.txt"));
+
+        List<Profesor> listaProfesores = new ArrayList<Profesor>();
+        String linea;
+        String[] datos;
+        linea = fProfesores.readLine();
+
+        while (linea != null) {
+            datos = linea.split(":");
+            Profesor nuevoProfesor = new Profesor(datos[0], datos[1], datos[2], datos[3]);
+            listaProfesores.add(nuevoProfesor);
+            linea = fProfesores.readLine();
+        }
+
+		return listaProfesores;
 	}
 
 	public static void guardarTrabajo(TFG trabajo) throws IOException{

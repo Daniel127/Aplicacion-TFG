@@ -42,10 +42,14 @@ public class TFG {
 
 	public void finalizar(String fechaDefensa, String convocatoria, float nota) {
 		//TODO
+        this.fechaDefensa = fechaDefensa;
+        this.convocatoria = convocatoria;
+        this.nota = nota;
 	}
 	
 	public void liberar(){
-		//TODO
+		this.alumno= "";
+		this.fechaInicio = "";
 	}
 	
 	public boolean estaDisponible() {
