@@ -33,7 +33,7 @@ public class ControladorAplicacion {
         try{
         	profesores.anyadirProfesores(GestorFicheros.leerProfesores());
         }catch(IOException i){
-            vista.error("NO EXISTE UN FICHERO DE PROFESORES. NO SE PODR� NI A�ADIR TFGs NI OBTENER INFORMACION DE PROFESOR");
+            vista.error("NO EXISTE UN FICHERO DE PROFESORES. NO SE PODRÁ NI AÑADIR TFGs NI OBTENER INFORMACION DE PROFESOR");
 
         }
         menu.ejecutar();
@@ -69,7 +69,7 @@ public class ControladorAplicacion {
             apellidos = vista.leerString("Apellidos Profesor: ");
         }
         TFG nuevo = new TFG(titulo, descripcion, fecha, apellidos);
-        boolean asignarAlumno = vista.leerBoolean("�El TFG tiene un alumno asignado? (true/false): ");
+        boolean asignarAlumno = vista.leerBoolean("¿El TFG tiene un alumno asignado? (true/false): ");
         if (asignarAlumno) {
             this.asignarAlumno(nuevo);
         }
@@ -77,12 +77,14 @@ public class ControladorAplicacion {
         try {
             GestorFicheros.guardarTrabajo(nuevo);
         } catch (IOException e) {
-            vista.error("NO FUE POSIBLE A�ADIR EL TRABAJO A EL FICHERO");
+            vista.error("NO FUE POSIBLE AÑADIR EL TRABAJO A EL FICHERO");
         }
         vista.leerString("Pulsa una tecla para continuar....");
     }
 
     public void consultarDatosProfesor() {
+        vista.imprimirMensaje("Profesores registrados:");
+        vista.imprimirProfesores();
         String ap = vista.leerString("Dame los apellidos del profesor: ");
         Profesor aux = profesores.obtenerProfesor(ap);
         if (aux == null) {
@@ -147,7 +149,7 @@ public class ControladorAplicacion {
             vista.imprimirMensaje("El TFG ha sido eliminado correctamente ");
             vista.leerString("Pulsa una tecla para continuar....");
         } else {
-            vista.imprimirMensaje("La lista de TFGs esta vacia.Añade antes de borrar");
+            vista.imprimirMensaje("La lista de TFGs esta vacia.AÃ±ade antes de borrar");
         }
 
     }
@@ -208,7 +210,7 @@ public class ControladorAplicacion {
             return false;
         }
         if (!(0 <= anyo && anyo <= 9999)) {
-            vista.error("Introduzca un año en el rango [0,9999]");
+            vista.error("Introduzca un aÃ±o en el rango [0,9999]");
             return false;
         }
         return true;
