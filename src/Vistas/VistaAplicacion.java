@@ -26,7 +26,7 @@ public class VistaAplicacion {
 		gestorIO.escribirLinea("== Menu Principal ==");
 		gestorIO.escribirLinea("1). Mostrar TFG libres");
 		gestorIO.escribirLinea("2). Asignar un alumno a un TFG");
-		gestorIO.escribirLinea("3). Añadir TFG");
+		gestorIO.escribirLinea("3). AÃ±adir TFG");
 		gestorIO.escribirLinea("4). Modificar TFG");
 		gestorIO.escribirLinea("5). Eliminar TFG");
 		gestorIO.escribirLinea("6). Consultar datos de profesor");
@@ -81,6 +81,7 @@ public class VistaAplicacion {
 		for (Profesor p : profesores.getProfesores()) {
 			gestorIO.escribirLinea("(" + i++ + ")  " + p.getApellidos() + ", " + p.getNombre());
 		}
+		gestorIO.escribirLinea();
 	}
 
 	public void imprimirMensaje(String mensaje) {
