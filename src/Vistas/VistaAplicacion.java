@@ -21,40 +21,23 @@ public class VistaAplicacion {
 		this.profesores = profesores;
 		this.gestorIO = GestorIO.getGestorIO();
 	}
-	
+
 	public void imprimirMenu() {
 		gestorIO.escribirLinea("== Menu Principal ==");
 		gestorIO.escribirLinea("1). Mostrar TFG libres");
 		gestorIO.escribirLinea("2). Asignar un alumno a un TFG");
-		gestorIO.escribirLinea("3). Aï¿½adir TFG");
+		gestorIO.escribirLinea("3). Añadir TFG");
 		gestorIO.escribirLinea("4). Modificar TFG");
 		gestorIO.escribirLinea("5). Eliminar TFG");
 		gestorIO.escribirLinea("6). Consultar datos de profesor");
 		gestorIO.escribirLinea("7). Salir\n");
 	}
 
-	public void imprimirTrabajosLibres() {
-		List<TFG> trabajosLibres = trabajos.getTrabajosLibres();
-		int i = 1;
-		gestorIO.escribirLinea();
-		if(trabajosLibres.size() > 0){
-			for (TFG trabajo : trabajosLibres) {
-				gestorIO.escribirLinea("Trabajo " + i++);
-				gestorIO.escribirLinea("Titulo: " + trabajo.getTitulo());
-				gestorIO.escribirLinea("Descripcion: " + trabajo.getDescripcion());
-				gestorIO.escribirLinea("Fecha de registro: " + trabajo.getFechaRegistro());
-				gestorIO.escribirLinea("Profesor a cargo: " + trabajo.getProfesor());
-				gestorIO.escribirLinea();
-			}
-		}else{
-			gestorIO.escribirLinea("No hay trabajos libres");
-		}
-	}
 
-	public void imprimirOpcionesModificado(){
+	public void imprimirOpcionesModificado() {
 		List<TFG> trabajosLibres = trabajos.getTrabajosAsignados();
 		gestorIO.escribirLinea();
-		if(trabajosLibres.size() > 0){
+		if (trabajosLibres.size() > 0) {
 			gestorIO.escribirLinea("== Menu Modificacion de TFG ==");
 			gestorIO.escribirLinea("1). Liberar TFG");
 			gestorIO.escribirLinea("2). Finalizar TFG");
@@ -63,32 +46,42 @@ public class VistaAplicacion {
 		}
 	}
 
-	public void imprimirTrabajosAsignados() {
-		List<TFG> trabajosAsignados = trabajos.getTrabajosAsignados();
+	
+
+	public void imprimirTrabajos(List<TFG> trabajos) {
+
 		int i = 1;
 		gestorIO.escribirLinea();
-		if(trabajosAsignados.size() > 0){
-			for (TFG trabajo : trabajosAsignados) {
+		if (trabajos.size() > 0) {
+			for (TFG trabajo : trabajos) {
 				gestorIO.escribirLinea("Trabajo " + i++);
 				gestorIO.escribirLinea("Titulo: " + trabajo.getTitulo());
 				gestorIO.escribirLinea("Descripcion: " + trabajo.getDescripcion());
 				gestorIO.escribirLinea("Fecha de registro: " + trabajo.getFechaRegistro());
 				gestorIO.escribirLinea("Profesor a cargo: " + trabajo.getProfesor());
-				gestorIO.escribirLinea("Alumno asignado: " + trabajo.getAlumno());
-				gestorIO.escribirLinea("Fecha de inicio: " + trabajo.getFechaInicio());
+				if (!trabajo.getAlumno().equals("")) {
+					gestorIO.escribirLinea("Alumno asignado: " + trabajo.getAlumno());
+					gestorIO.escribirLinea("Fecha de inicio: " + trabajo.getFechaInicio());
+					if (!trabajo.getFechaDefensa().equals("")) {
+						gestorIO.escribirLinea("Fecha de defensa: " + trabajo.getFechaDefensa());
+						gestorIO.escribirLinea("Convocatoria: " + trabajo.getConvocatoria());
+						gestorIO.escribirLinea("Nota: " + trabajo.getNota());
+					}
+				}
+
 				gestorIO.escribirLinea();
 			}
-		}else{
-			gestorIO.escribirLinea("No hay trabajos asignados");
+		} else {
+			gestorIO.escribirLinea("No hay trabajos que cumplan los criterios");
 		}
 	}
 
-    public void imprimirProfesores(){
-        int i=1;
-        for(Profesor p : profesores.getProfesores()){
-            gestorIO.escribirLinea("(" + i++ + ")  " + p.getApellidos() + ", " + p.getNombre());
-        }
-    }
+	public void imprimirProfesores() {
+		int i = 1;
+		for (Profesor p : profesores.getProfesores()) {
+			gestorIO.escribirLinea("(" + i++ + ")  " + p.getApellidos() + ", " + p.getNombre());
+		}
+	}
 
 	public void imprimirMensaje(String mensaje) {
 		gestorIO.escribirLinea(mensaje);
@@ -109,10 +102,9 @@ public class VistaAplicacion {
 	public boolean leerBoolean(String mensaje) {
 		return gestorIO.leerBoolean(mensaje);
 	}
-	
-	public float leerFloat(String mensaje){
+
+	public float leerFloat(String mensaje) {
 		return gestorIO.leerFloat(mensaje);
 	}
-
 
 }

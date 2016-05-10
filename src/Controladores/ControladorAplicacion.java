@@ -30,7 +30,14 @@ public class ControladorAplicacion {
         } catch (IOException e) {
             vista.error("NO FUE POSIBLE LEER LOS TRABAJOS DEL FICHERO");
         }
+        try{
+        	profesores.anyadirProfesores(GestorFicheros.leerProfesores());
+        }catch(IOException i){
+            vista.error("NO EXISTE UN FICHERO DE PROFESORES. NO SE PODRÁ NI AÑADIR TFGs NI OBTENER INFORMACION DE PROFESOR");
+
+        }
         menu.ejecutar();
+ 
     }
 
     public void cerrarAplicacion() {
@@ -42,14 +49,10 @@ public class ControladorAplicacion {
     }
 
     public void consultarTrabajosLibres() {
-        vista.imprimirTrabajosLibres();
+        vista.imprimirTrabajos(trabajos.getTrabajosLibres());
         vista.leerString("Presiona una tecla para continuar....");
     }
 
-    public void consultarTrabajosAsignados() {
-        vista.imprimirTrabajosAsignados();
-        vista.leerString("Presiona una tecla para continuar....");
-    }
 
     public void anyadirTrabajo() {
         vista.imprimirMensaje("Introduce los datos del TFG");
@@ -60,11 +63,13 @@ public class ControladorAplicacion {
         // Opinion: Creo que se deberia mostrar una lista con los profesores existentes
         String apellidos = vista.leerString("Apellidos Profesor: ");
         while (!profesores.profesorexiste(apellidos)) {
-            vista.imprimirMensaje("El profesor especificado no esta en la lista.Dame de nuevo los apellidos");
+            vista.imprimirMensaje("El profesor especificado no esta en la lista.");
+            vista.imprimirMensaje("Profesores registrados:");
+            vista.imprimirProfesores();
             apellidos = vista.leerString("Apellidos Profesor: ");
         }
         TFG nuevo = new TFG(titulo, descripcion, fecha, apellidos);
-        boolean asignarAlumno = vista.leerBoolean("Â¿El TFG tiene un alumno asignado? (true/false): ");
+        boolean asignarAlumno = vista.leerBoolean("¿El TFG tiene un alumno asignado? (true/false): ");
         if (asignarAlumno) {
             this.asignarAlumno(nuevo);
         }
@@ -72,7 +77,7 @@ public class ControladorAplicacion {
         try {
             GestorFicheros.guardarTrabajo(nuevo);
         } catch (IOException e) {
-            vista.error("NO FUE POSIBLE AÃ‘ADIR EL TRABAJO A EL FICHERO");
+            vista.error("NO FUE POSIBLE AÑADIR EL TRABAJO A EL FICHERO");
         }
         vista.leerString("Pulsa una tecla para continuar....");
     }
@@ -94,7 +99,7 @@ public class ControladorAplicacion {
     }
 
     public void modificarTrabajo() {
-        //TODO
+
         int peticion;
         int i;
         int total = trabajos.getTrabajosAsignados().size();
@@ -104,7 +109,7 @@ public class ControladorAplicacion {
                 peticion = vista.leerInt("Elija una opcion: ");
             } while (peticion != 1 && peticion != 2);
             if (peticion == 1) {
-                vista.imprimirTrabajosAsignados();
+                vista.imprimirTrabajos(trabajos.getTrabajosAsignados());
                 do {
                     i = vista.leerInt("Que trabajo desea liberar? ");
                 } while (i > total || 0 >= i);
@@ -112,7 +117,7 @@ public class ControladorAplicacion {
                 vista.imprimirMensaje("Trabajo liberado ");
                 vista.leerString("Pulsa una tecla para continuar....");
             } else if (peticion == 2) {
-                vista.imprimirTrabajosAsignados();
+                vista.imprimirTrabajos(trabajos.getTrabajosAsignados());
                 do {
                     i = vista.leerInt("Que trabajo desea finalizar? ");
                 } while (i > total || 0 > i);
@@ -127,6 +132,7 @@ public class ControladorAplicacion {
 
     public void eliminarTrabajo() {
 
+    	vista.imprimirTrabajos(trabajos.getTrabajos());
         if (trabajos.size() > 0) {
             int indice;
             do {
@@ -149,7 +155,7 @@ public class ControladorAplicacion {
 
     public void asignarAlumno() {
         List<TFG> libres = trabajos.getTrabajosLibres();
-        vista.imprimirTrabajosLibres();
+        vista.imprimirTrabajos(libres);
         if (libres.size() > 0) {
             int indice;
             do {

@@ -8,9 +8,6 @@ public class ColeccionProfesores {
 
 	public ColeccionProfesores() {
         profesores = new ArrayList<Profesor>();
-        // TODO: Quitar esta mierda
-        Profesor p1 = new Profesor("manuel", "gascon", "1", "gascon@hotmail.com");
-        profesores.add(p1);
 
 	}
 
